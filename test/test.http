@@ -1,0 +1,12 @@
+### Create Books
+POST http://localhost:4004/browse/Books HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Test",
+    "description": "Test Desc",
+    "author_ID" : 101,
+    "stock" : 100,
+    "price" : "120.00",
+    "Currency_code" : "INR"
+}
