@@ -42,7 +42,8 @@
                 "auth": {
                     "kind": "xsuaa"
                 }
-            }
+            },
+            "auth": "xsuaa"
         },
         "hana": {
             "deploy-format": "hdbtable"
