@@ -32,6 +32,7 @@ annotate Service.Books with @(
                 Value: Currency_code
             }
         ],
+
         SelectionFields               : [
             bookNumber,
             title,
@@ -103,7 +104,7 @@ annotate Service.Books with @(
                 },
                 {
                     $Type: 'UI.DataField',
-                    Value: author.Country_code
+                    Value: author.Country.code
                 }
             ]
         },
@@ -162,12 +163,12 @@ annotate Service.Books with @(
         TargetEntities  : [author]
     }}
 ) {
-    bookNumber  @(title: '{i18n>BOOK_NUMBER}');
-    title       @(title: '{i18n>BOOK_TITLE}');
-    description @(title: '{i18n>BOOK_DESC}');
-    stock       @(title: '{i18n>STOCK}');
-    price       @(title: '{i18n>PRICE}');
-    author      @(
+    bookNumber   @(title: '{i18n>BOOK_NUMBER}');
+    title        @(title: '{i18n>BOOK_TITLE}');
+    description  @(title: '{i18n>BOOK_DESC}')  @UI.MultiLineText: true;
+    stock        @(title: '{i18n>STOCK}');
+    price        @(title: '{i18n>PRICE}');
+    author       @(
         title : '{i18n>AUTHOR}',
         Common: {ValueList: {
             $Type         : 'Common.ValueListType',
@@ -190,7 +191,7 @@ annotate Service.Books with @(
                 {
                     $Type            : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty: 'placeOfBirth'
-                },
+},
                 {
                     $Type            : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty: 'Country_code'
@@ -208,10 +209,6 @@ annotate Service.Authors with {
 };
 
 annotate Service.Categories with @(UI: {LineItem #Category: [
-    {
-        $Type: 'UI.DataField',
-        Value: ID
-    },
     {
         $Type: 'UI.DataField',
         Value: categoryTitle

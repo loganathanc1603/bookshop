@@ -32,3 +32,4 @@ entity Categories : managed, cuid {
     categoryDescription : String;
     Books               : Association to one Books;
 }
+
