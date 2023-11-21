@@ -14,3 +14,27 @@ Content-Type: application/json
 ### Get Books
 GET http://localhost:4004/browse/Books HTTP/1.1
 Content-Type: application/json
+
+### Set Status
+GET http://localhost:4004/browse/Books(ID=20466922-7d57-4e76-b14c-e53fd97dcb11,IsActiveEntity=true)/CatalogService.setStatus HTTP/1.1
+Content-Type: application/json
+
+### Action MyAction for simple mathematics operation
+POST http://localhost:4004/browse/MyAction HTTP/1.1
+Content-Type: application/json
+
+{
+    "input": {
+        "field1": 120,
+        "field2": 2,
+        "operator": "+"
+    }
+}
+
+### Function to fetch book details
+GET http://localhost:4004/browse/MyFunction(bookNumber=201) HTTP/1.1
+Accept: application/json
+
+### Add function
+GET http://localhost:4004/browse/AddString(firstName='Loganathan',lastName='Chinnasamy') HTTP/1.1
+Accept: application/json

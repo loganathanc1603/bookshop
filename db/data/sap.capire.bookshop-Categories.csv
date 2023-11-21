@@ -1,6 +1,6 @@
-ID;categoryTitle;categoryDescription;Books_ID
-d8c5a8eb-aa68-498b-9ac3-0db9720257e4;ABAP;ABAP;a1e91e74-90c8-49b3-87bd-c3ec9e7deb57
-e7d943e6-7fc0-44f4-ab33-d9252ca3fe23;OO ABAP;OO ABAP;a1e91e74-90c8-49b3-87bd-c3ec9e7deb57
-c84f14cf-e156-40e1-a1d3-2a05834a438b;SAP ABAP;SAP ABAP;a1e91e74-90c8-49b3-87bd-c3ec9e7deb57
-1851bc50-97c6-46a7-9e04-76a7bac93b1e;Software Engineering;Software Engineering;20466922-7d57-4e76-b14c-e53fd97dcb11
-77f3f309-2f77-432a-86e9-c9261a71a013;ABAP;ABAP;20466922-7d57-4e76-b14c-e53fd97dcb11
+ID;categoryTitle;categoryDescription;Books_ID;createdAt;createdBy;modifiedAt;modifiedBy
+d8c5a8eb-aa68-498b-9ac3-0db9720257e4;ABAP;ABAP;a1e91e74-90c8-49b3-87bd-c3ec9e7deb57;2023-11-21T04:33:29.572Z;logu_c@live.com;2023-11-21T04:33:29.572Z;logu_c@live.com
+e7d943e6-7fc0-44f4-ab33-d9252ca3fe23;OO ABAP;OO ABAP;ad8edd60-0c59-422d-b17e-fedc508e4e9e;2023-11-21T04:33:29.572Z;logu_c@live.com;2023-11-21T04:33:29.572Z;logu_c@live.com
+c84f14cf-e156-40e1-a1d3-2a05834a438b;SAP ABAP;SAP ABAP;a1e91e74-90c8-49b3-87bd-c3ec9e7deb57;2023-11-21T04:33:29.572Z;logu_c@live.com;2023-11-21T04:33:29.572Z;logu_c@live.com
+1851bc50-97c6-46a7-9e04-76a7bac93b1e;SAP BTP;SAP BTP Cloud;20466922-7d57-4e76-b14c-e53fd97dcb11;2023-11-21T04:33:29.572Z;logu_c@live.com;2023-11-21T04:33:29.572Z;logu_c@live.com
+77f3f309-2f77-432a-86e9-c9261a71a013;SAP ABAP CDS;ABAP CDS;893f18ff-7227-449c-adfc-8756a04ce8e5;2023-11-21T04:33:29.572Z;logu_c@live.com;2023-11-21T04:33:29.572Z;logu_c@live.com

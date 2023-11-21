@@ -16,15 +16,21 @@ entity Books : managed, cuid {
     stock       : Integer;
     price       : Decimal(9, 2);
     Currency    : Currency;
+    status      : Association to one BookStatus;
     categories  : Composition of many Categories
                       on categories.Books = $self;
 }
 
-entity Authors : managed, cuid {
+entity Authors : cuid {
     name         : String(111);
     dateOfBirth  : Date;
     placeOfBirth : String;
     Country      : Country
+}
+
+entity BookStatus  {
+    key code        : String(2);
+        description : String
 }
 
 entity Categories : managed, cuid {
@@ -32,4 +38,3 @@ entity Categories : managed, cuid {
     categoryDescription : String;
     Books               : Association to one Books;
 }
-

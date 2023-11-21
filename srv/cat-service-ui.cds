@@ -8,6 +8,11 @@ annotate Service.Books with @(
     UI    : {
         LineItem                      : [
             {
+                $Type : 'UI.DataFieldForAction',
+                Action: 'CatalogService.setStatus',
+                Label : '{i18n>SET_STATUS}'
+            },
+            {
                 $Type: 'UI.DataField',
                 Value: bookNumber
             },
@@ -30,15 +35,27 @@ annotate Service.Books with @(
             {
                 $Type: 'UI.DataField',
                 Value: Currency_code
+            },
+            {
+                $Type             : 'UI.DataField',
+                Value             : status.description,
+                ![@UI.Importance] : #High
             }
         ],
+
+        Identification                : [{
+            $Type : 'UI.DataFieldForAction',
+            Action: 'CatalogService.setStatus',
+            Label : '{i18n>SET_STATUS}'
+        }],
 
         SelectionFields               : [
             bookNumber,
             title,
             author_ID,
             stock,
-            price
+            price,
+            status_code
         ],
         HeaderInfo                    : {
             $Type         : 'UI.HeaderInfoType',
@@ -80,6 +97,10 @@ annotate Service.Books with @(
                 {
                     $Type: 'UI.DataField',
                     Value: Currency_code
+                },
+                {
+                    $Type: 'UI.DataField',
+                    Value: status_code
                 }
             ]
         },
@@ -157,17 +178,43 @@ annotate Service.Books with @(
             }
         ]
     },
-    Common: {SideEffects #AuthorChanged: {
-        $Type           : 'Common.SideEffectsType',
-        SourceProperties: ['author_ID'],
-        TargetEntities  : [author]
-    }}
+    Common: {
+        SideEffects #AuthorChanged: {
+            $Type           : 'Common.SideEffectsType',
+            SourceProperties: ['author_ID'],
+            TargetEntities  : [author]
+        }
+    }
 ) {
     bookNumber   @(title: '{i18n>BOOK_NUMBER}');
     title        @(title: '{i18n>BOOK_TITLE}');
     description  @(title: '{i18n>BOOK_DESC}')  @UI.MultiLineText: true;
     stock        @(title: '{i18n>STOCK}');
     price        @(title: '{i18n>PRICE}');
+    status       @(
+        title : '{i18n>BOOKSTATUS}',
+        Common: {
+            Text           : status.description,
+            TextArrangement: #TextFirst,
+            ValueListWithFixedValues,
+            ValueList      : {
+                $Type         : 'Common.ValueListType',
+                Label         : 'Status',
+                CollectionPath: 'BookStatus',
+                Parameters    : [
+                    {
+                        $Type            : 'Common.ValueListParameterInOut',
+                        LocalDataProperty: status_code,
+                        ValueListProperty: 'code'
+                    },
+                    {
+                        $Type            : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty: 'description'
+                    }
+                ]
+            }
+        }
+    );
     author       @(
         title : '{i18n>AUTHOR}',
         Common: {ValueList: {
@@ -191,7 +238,7 @@ annotate Service.Books with @(
                 {
                     $Type            : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty: 'placeOfBirth'
-},
+                },
                 {
                     $Type            : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty: 'Country_code'
@@ -221,4 +268,9 @@ annotate Service.Categories with @(UI: {LineItem #Category: [
     ID                  @(title: '{i18n>CATEGORY_ID}');
     categoryTitle       @(title: '{i18n>CATEGORY_TITLE}');
     categoryDescription @(title: '{i18n>CATEGORY_DESC}');
+};
+
+annotate Service.BookStatus {
+    code        @(title: '{i18n>BOOKSTATUS_CODE}');
+    description @(title: '{i18n>BOOKSTATUS_DESC}');
 };
