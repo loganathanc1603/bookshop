@@ -6,6 +6,7 @@ annotate Service.Authors with @(readonly: true);
 
 annotate Service.Books with @(
     UI    : {
+        //UpdateHidden : {$edmJson : {$Eq : [{$Path : 'status_code'},'P']}},
         LineItem                      : [
             {
                 $Type : 'UI.DataFieldForAction',
@@ -42,13 +43,12 @@ annotate Service.Books with @(
                 ![@UI.Importance] : #High
             }
         ],
-
         Identification                : [{
             $Type : 'UI.DataFieldForAction',
             Action: 'CatalogService.setStatus',
-            Label : '{i18n>SET_STATUS}'
+            Label : '{i18n>SET_STATUS}',
+            ![@UI.Hidden] : {$edmJson : {$Ne : [{$Path : 'status_code'}, 'N']}}
         }],
-
         SelectionFields               : [
             bookNumber,
             title,
@@ -150,7 +150,6 @@ annotate Service.Books with @(
                 }
             ]
         },
-
         Facets                        : [
             {
                 $Type : 'UI.ReferenceFacet',

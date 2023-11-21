@@ -2,6 +2,9 @@ using {sap.capire.bookshop as my} from '../db/schema';
 
 service CatalogService @(path: '/browse') {
     entity Books      as projection on my.Books actions {
+         @( 
+            cds.odata.bindingparameter.name : 'status',
+            Common.SideEffects              : {TargetProperties : ['status/status_code']}   )
         action setStatus();
     };
     entity Authors    as projection on my.Authors;

@@ -20,7 +20,11 @@ class CatalogService extends cds.ApplicationService {
         });
 
         // ----------------------#### Custom Action & Function Implementation #####------------ //
-        this.on('setStatus', async (req) => {
+        this.on('setStatus', Books, async req => {
+            await cds.update(Books, req._params[0].ID).set({status_code: 'P'});
+        });
+
+        this.on('setStatus1', async (req) => {
             let ID = req._params[0].ID;
             const query = SELECT.from(Books)
                 .columns
