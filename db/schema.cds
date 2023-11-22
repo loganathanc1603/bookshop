@@ -28,9 +28,14 @@ entity Authors : cuid {
     Country      : Country
 }
 
-entity BookStatus  {
-    key code        : String(2);
-        description : String
+entity BookStatus {
+    key code         : String enum {
+            New       = 'N';
+            Published = 'P';
+        } default 'N'; //> will be used for foreign keys as well
+        description  : String;
+        criticality  : Integer; //  2: yellow colour,  3: green colour, 0: unknown
+        fieldControl : Integer @odata.Type: 'Edm.Byte'; // 1: #ReadOnly, 7: #Mandatory
 }
 
 entity Categories : managed, cuid {

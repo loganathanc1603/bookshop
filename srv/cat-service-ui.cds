@@ -30,16 +30,17 @@ annotate Service.Books with @(
                 Value: stock
             },
             {
-                $Type: 'UI.DataField',
-                Value: price,
-                ![@UI.Importance]: #High,
-                ![@HTML5.CssDefaults] : {width : '150px'}
+                $Type                : 'UI.DataField',
+                Value                : price,
+                ![@UI.Importance]    : #High,
+                ![@HTML5.CssDefaults]: {width: '150px'}
             },
             {
-                $Type            : 'UI.DataField',
-                Value            : status_code,
-                ![@UI.Importance]: #High,
-                ![@HTML5.CssDefaults] : {width : '150px'}
+                $Type                : 'UI.DataField',
+                Value                : status_code,
+                Criticality          : status.criticality,
+                ![@UI.Importance]    : #High,
+                ![@HTML5.CssDefaults]: {width: '150px'}
             }
         ],
         Identification                : [{
@@ -179,9 +180,9 @@ annotate Service.Books with @(
 ) {
     bookNumber   @(title: '{i18n>BOOK_NUMBER}');
     title        @(title: '{i18n>BOOK_TITLE}');
-    description  @(title: '{i18n>BOOK_DESC}')  @UI.MultiLineText: true;
+    description  @(title: '{i18n>BOOK_DESC}')  @UI.MultiLineText    : true;
     stock        @(title: '{i18n>STOCK}');
-    price        @title: '{i18n>PRICE}' @Measures.ISOCurrency: Currency_code;
+    price        @title: '{i18n>PRICE}'        @Measures.ISOCurrency: Currency_code;
     status       @(
         title : '{i18n>BOOKSTATUS}',
         Common: {
@@ -189,7 +190,7 @@ annotate Service.Books with @(
             TextArrangement: #TextFirst,
             ValueListWithFixedValues,
             ValueList      : {
-                //$Type         : 'Common.ValueListType',
+                $Type         : 'Common.ValueListType',
                 Label         : 'Status',
                 CollectionPath: 'BookStatus',
                 Parameters    : [
@@ -208,39 +209,43 @@ annotate Service.Books with @(
     );
     author       @(
         title : '{i18n>AUTHOR}',
-        Common: {ValueList: {
-            $Type         : 'Common.ValueListType',
-            Label         : 'Author',
-            CollectionPath: 'Authors',
-            Parameters    : [
-                {
-                    $Type            : 'Common.ValueListParameterInOut',
-                    LocalDataProperty: author_ID,
-                    ValueListProperty: 'ID'
-                },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'name'
-                },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'dateOfBirth'
-                },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'placeOfBirth'
-                },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'Country_code'
-                }
-            ]
-        }, }
+        Common: {
+            Text     : author.name,
+            TextArrangement : #TextFirst,
+            ValueList: {
+                $Type         : 'Common.ValueListType',
+                Label         : 'Author',
+                CollectionPath: 'Authors',
+                Parameters    : [
+                    {
+                        $Type            : 'Common.ValueListParameterInOut',
+                        LocalDataProperty: author_ID,
+                        ValueListProperty: 'ID'
+                    },
+                    {
+                        $Type            : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty: 'name'
+                    },
+                    {
+                        $Type            : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty: 'dateOfBirth'
+                    },
+                    {
+                        $Type            : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty: 'placeOfBirth'
+                    },
+                    {
+                        $Type            : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty: 'Country_code'
+                    }
+                ]
+            },
+        }
     );
 };
 
 annotate Service.Authors with {
-    ID           @(title: '{i18n>AUTHOR_ID}');
+    ID           @title: '{i18n>AUTHOR_ID}'  @Common.Text: name;
     name         @(title: '{i18n>AUTHOR_NAME}');
     dateOfBirth  @(title: '{i18n>DATE_OF_BIRTH}');
     placeOfBirth @(title: '{i18n>PLACE_OF_BIRTH}');
