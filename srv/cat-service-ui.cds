@@ -31,30 +31,28 @@ annotate Service.Books with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: price
+                Value: price,
+                ![@UI.Importance]: #High,
+                ![@HTML5.CssDefaults] : {width : '150px'}
             },
             {
-                $Type: 'UI.DataField',
-                Value: Currency_code
-            },
-            {
-                $Type             : 'UI.DataField',
-                Value             : status.description,
-                ![@UI.Importance] : #High
+                $Type            : 'UI.DataField',
+                Value            : status_code,
+                ![@UI.Importance]: #High,
+                ![@HTML5.CssDefaults] : {width : '150px'}
             }
         ],
         Identification                : [{
             $Type : 'UI.DataFieldForAction',
             Action: 'CatalogService.setStatus',
-            Label : '{i18n>SET_STATUS}',
-            ![@UI.Hidden] : {$edmJson : {$Ne : [{$Path : 'status_code'}, 'N']}}
+            Label : '{i18n>SET_STATUS}'
+        //![@UI.Hidden] : {$edmJson : {$Ne : [{$Path : 'status_code'}, 'N']}}
         }],
         SelectionFields               : [
             bookNumber,
             title,
             author_ID,
-            stock,
-            price,
+            Currency_code,
             status_code
         ],
         HeaderInfo                    : {
@@ -93,10 +91,6 @@ annotate Service.Books with @(
                 {
                     $Type: 'UI.DataField',
                     Value: price
-                },
-                {
-                    $Type: 'UI.DataField',
-                    Value: Currency_code
                 },
                 {
                     $Type: 'UI.DataField',
@@ -177,19 +171,17 @@ annotate Service.Books with @(
             }
         ]
     },
-    Common: {
-        SideEffects #AuthorChanged: {
-            $Type           : 'Common.SideEffectsType',
-            SourceProperties: ['author_ID'],
-            TargetEntities  : [author]
-        }
-    }
+    Common: {SideEffects #AuthorChanged: {
+        $Type           : 'Common.SideEffectsType',
+        SourceProperties: ['author_ID'],
+        TargetEntities  : [author]
+    }}
 ) {
     bookNumber   @(title: '{i18n>BOOK_NUMBER}');
     title        @(title: '{i18n>BOOK_TITLE}');
     description  @(title: '{i18n>BOOK_DESC}')  @UI.MultiLineText: true;
     stock        @(title: '{i18n>STOCK}');
-    price        @(title: '{i18n>PRICE}');
+    price        @title: '{i18n>PRICE}' @Measures.ISOCurrency: Currency_code;
     status       @(
         title : '{i18n>BOOKSTATUS}',
         Common: {
@@ -197,7 +189,7 @@ annotate Service.Books with @(
             TextArrangement: #TextFirst,
             ValueListWithFixedValues,
             ValueList      : {
-                $Type         : 'Common.ValueListType',
+                //$Type         : 'Common.ValueListType',
                 Label         : 'Status',
                 CollectionPath: 'BookStatus',
                 Parameters    : [
@@ -270,6 +262,6 @@ annotate Service.Categories with @(UI: {LineItem #Category: [
 };
 
 annotate Service.BookStatus {
-    code        @(title: '{i18n>BOOKSTATUS_CODE}');
-    description @(title: '{i18n>BOOKSTATUS_DESC}');
+    code        @title: '{i18n>BOOKSTATUS_CODE}'  @Common.Text: description;
+    description @title: '{i18n>BOOKSTATUS_DESC}';
 };

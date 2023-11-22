@@ -16,7 +16,7 @@ entity Books : managed, cuid {
     stock       : Integer;
     price       : Decimal(9, 2);
     Currency    : Currency;
-    status      : Association to one BookStatus;
+    status      : Association to BookStatus;
     categories  : Composition of many Categories
                       on categories.Books = $self;
 }

@@ -3,6 +3,7 @@ using {sap.capire.bookshop as my} from '../db/schema';
 service CatalogService @(path: '/browse') {
     entity Books      as projection on my.Books actions {
          @( 
+            Core.OperationAvailable : {$edmJson: { $Ne: [{ $Path: 'status/status_code'}, 'P']}},
             cds.odata.bindingparameter.name : 'status',
             Common.SideEffects              : {TargetProperties : ['status/status_code']}   )
         action setStatus();
