@@ -7,11 +7,11 @@
       "passport": {
         "strategy": "mock",
         "users": {
-          "logu_c@live.com": {
+          "logu_c@xyz.com": {
             "password": "123",
-            "id": "logu_c@live.com",
+            "id": "logu_c@xyz.com",
             "attr": {
-              "email": "logu_c@live.com"
+              "email": "logu_c@xyz.com"
             },
             "roles": ["Manager"]
           }
