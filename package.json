@@ -35,17 +35,19 @@
       "plugin": true
     },
     "requires": {
-      "db": {
-        "kind": "sql"
-      },
-      "auth": {
-        "kind": "mocked",
-        "users": {
-          "loga@live.com": {
-            "password": "123",
-            "id": "loga",
-            "roles": [],
-            "attr": { }
+      "[development]": {
+        "db": {
+          "kind": "sql"
+        },
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "logu_c@xyz.com": {
+              "password": "123",
+              "id": "logu_c@xyz.com",
+              "roles": [],
+              "attr": {}
+            }
           }
         }
       },
