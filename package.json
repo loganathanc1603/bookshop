@@ -38,6 +38,17 @@
       "db": {
         "kind": "sql"
       },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "loga@live.com": {
+            "password": "123",
+            "id": "loga",
+            "roles": [],
+            "attr": { }
+          }
+        }
+      },
       "[production]": {
         "db": {
           "kind": "hana-cloud"

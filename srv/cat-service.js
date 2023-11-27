@@ -4,6 +4,10 @@ class CatalogService extends cds.ApplicationService {
 
         const { Books, Authors } = this.entities;
 
+        // this.before('*', req =>
+        //   req.user.is('authenticated') || req.reject(403)
+        // );
+
         this.before('CREATE', 'Books', async (req) => {
             const { maxID } = await SELECT.one`max(bookNumber) as maxID`.from(Books);
             if (!req.data.title) {
@@ -21,7 +25,7 @@ class CatalogService extends cds.ApplicationService {
 
         // ----------------------#### Custom Action & Function Implementation #####------------ //
         this.on('setStatus', Books, async req => {
-            await cds.update(Books, req._params[0].ID).set({status_code: 'P'});
+            await cds.update(Books, req._params[0].ID).set({ status_code: 'P' });
         });
 
         this.on('setStatus1', async (req) => {
