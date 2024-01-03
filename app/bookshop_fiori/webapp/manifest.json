@@ -28,19 +28,19 @@
     },
     "crossNavigation": {
       "inbounds": {
-          "bank-display": {
-              "semanticObject": "bookshop",
-              "action": "display",
-              "title": "{{flpTitle}}",
-              "subTitle": "{{flpSubtitle}}",
-              "icon": "sap-icon://retail-store",
-              "signature": {
-                  "parameters": {},
-                  "additionalParameters": "allowed"
-              }
+        "bank-display": {
+          "semanticObject": "bookshop",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "subTitle": "{{flpSubtitle}}",
+          "icon": "sap-icon://retail-store",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
           }
+        }
       }
-  }
+    }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -99,7 +99,6 @@
       "css": []
     },
     "routing": {
-      "config": {},
       "routes": [
         {
           "pattern": ":?query:",
@@ -127,6 +126,30 @@
                     "route": "BooksObjectPage"
                   }
                 }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "CustomAction": {
+                      "press": "bookshopfiori.ext.controller.CustomColumnButton.handleCustomAction",
+                      "visible": true,
+                      "enabled": "bookshopfiori.ext.controller.CustomColumnButton.enabledForCompletedOnly",
+                      "text": "Custom Action"
+                    }
+                  },
+                  "columns": {
+                    "CustomColumnOnListReport": {
+                      "header": "{i18n>extraButtonOnColum}",
+                      "importance": "High",
+                      "horizontalAlign": "Center",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "DataField::stock"
+                      },
+                      "template": "bookshopfiori.ext.fragment.CustomColumnButton"
+                    }
+                  }
+                }
               }
             }
           }
@@ -138,7 +161,22 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Books"
+              "contextPath": "/Books",
+              "content": {
+                "body": {
+                  "sections": {
+                    "myCustomSection": {
+                      "template": "bookshopfiori.custom.fragment.ExtraSection",
+                      "title": "{i18n>extraSection}",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "GENERALINFO"
+                      },
+                      "type": "XMLFragment"
+                    }
+                  }
+                }
+              }
             }
           }
         }

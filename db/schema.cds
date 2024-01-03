@@ -14,11 +14,13 @@ entity Books : managed, cuid {
     description : String;
     author      : Association to one Authors;
     stock       : Integer;
+    bookLink    : String;
     price       : Decimal(9, 2);
     Currency    : Currency;
     status      : Association to BookStatus;
     categories  : Composition of many Categories
                       on categories.Books = $self;
+    //attachments : Comp
 }
 
 entity Authors : cuid {
@@ -42,4 +44,11 @@ entity Categories : managed, cuid {
     categoryTitle       : String(100);
     categoryDescription : String;
     Books               : Association to one Books;
+}
+
+entity Attachments : cuid, managed {
+    book      : Association to Books;
+    content   : LargeBinary  @Core.MediaType: mediaType  @Core.ContentDisposition.Filename: fileName  @Core.ContentDisposition.Type: 'inline';
+    mediaType : String       @Core.IsMediaType;
+    fileName  : String;
 }

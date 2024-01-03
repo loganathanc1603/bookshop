@@ -1,0 +1,7 @@
+<core:FragmentDefinition 
+	xmlns:core="sap.ui.core" 
+	xmlns="sap.m">
+	<Button core:require="{ handler: 'bookshopfiori/ext/controller/CustomColumnButton' }" 
+			id="idButtonCustom1" text="{price}" press="handler.handleCustomButton" 
+			enabled="{!= ${ui>/editMode} === 'Editable'}" />
+</core:FragmentDefinition>
